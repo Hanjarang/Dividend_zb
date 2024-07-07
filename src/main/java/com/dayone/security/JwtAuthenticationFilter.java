@@ -19,7 +19,7 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    public static final String TOKEN_HEADER = "Authorization"; // 어떤 키를 기준으로 토큰을 주고 받을거니?
+    public static final String TOKEN_HEADER = "Authorization";
     public static final String TOKEN_PREFIX = "Bearer ";
 
     private final TokenProvider tokenProvider;
@@ -34,7 +34,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             Authentication auth = this.tokenProvider.getAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(auth);
 
-            // 어떤 사용자가 어떤 경로에 접근했는지에 대한 로그
+
             log.info(String.format("[%s] -> %s", this.tokenProvider.getUsername(token),
                     request.getRequestURL()));
         }
